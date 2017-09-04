@@ -10,13 +10,7 @@ class App extends React.Component {
         <div className='wrapper'>
           <div className='site-content'>
             <h1>GoMoku Game</h1>
-            <div className='board-container'>
-              <Board />
-            </div>
-            <div className='info-container'>
-              <small>Your goal in Five-in-a-row is to get five X's in a
-               row while preventing your opponent from getting five O's in a row.</small>
-            </div>
+            <Board />
           </div>
         </div>
       </div>

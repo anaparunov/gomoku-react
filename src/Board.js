@@ -111,25 +111,33 @@ class Board extends React.Component {
     const {board, won} = this.state
     const current = this.state.current
     return (
-      <div className={'board ' + this.state.current}>
-        {_.map(_.range(0, SIZE), function (y) {
-          return (
-            <div className='board__row'>
-              {_.map(_.range(0, SIZE), function (x) {
-                return <Square mark={board[x][y]} click={function () {
-                  if (won) {
-                    return
-                  }
-                  click(x, y)
-                }} />
-              })}
-            </div>
-          )
-        })}
-        {current === X && <h1>PLAYER MOVE: X</h1>}
-        {current === O && <h1>PLAYER MOVE: O</h1>}
-        {won === X && <h1>X won</h1>}
-        {won === O && <h1>O won</h1>}
+      <div>
+        <div className='board-container'>
+          <div className={'board ' + this.state.current}>
+            {_.map(_.range(0, SIZE), function (y) {
+              return (
+                <div className='board__row'>
+                  {_.map(_.range(0, SIZE), function (x) {
+                    return <Square mark={board[x][y]} click={function () {
+                      if (won) {
+                        return
+                      }
+                      click(x, y)
+                    }} />
+                  })}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <div className='info-container'>
+          {current === X && <h2>PLAYERS MOVE: X</h2>}
+          {current === O && <h2>PLAYERS MOVE: O</h2>}
+          {won === X && <h1>X won</h1>}
+          {won === O && <h1>O won</h1>}
+          <small>Your goal in Five-in-a-row is to get five X's in a
+           row while preventing your opponent from getting five O's in a row.</small>
+        </div>
       </div>
     )
   }
