@@ -6,3 +6,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 registerServiceWorker()
+
+// undo funkcionalnost
+// odabrat velicinu ploce
+// igranje protiv kompjutera

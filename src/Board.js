@@ -7,33 +7,67 @@ import {repeatsTimes} from './util'
 const SIZE = 20
 const WIN = 5
 
+function initialState () {
+  return {
+    board: _.times(SIZE, () => _.times(SIZE, _.constant(null))),
+    current: X,
+    prevBoards: [],
+    prevCurrent: O,
+    won: null,
+  }
+}
+
+function log (board) {
+  console.log(_.join(_.map(board, function (row) {
+    return _.join(_.map(row, function (col) {
+      if (col === null) {
+        return 0
+      }
+      return col
+    }), ' ')
+  }), '\n'))
+}
+
+
 class Board extends React.Component {
   constructor () {
     super()
-    const board = _.times(SIZE, () => _.times(SIZE, _.constant(null)))
-    this.state = {
-      board,
-      current: X,
-      prev: [],
-      won: null,
-    }
+    // const board = _.times(SIZE, () => _.times(SIZE, _.constant(null)))
+
+    this.state = initialState()
     this.click = this.click.bind(this)
-    this.log = this.log.bind(this)
+    this.reset = this.reset.bind(this)
+    this.undo = this.undo.bind(this)
     this.process = this.process.bind(this)
     this.win = this.win.bind(this)
     this.won = this.won.bind(this)
   }
 
-  log () {
-    const {board} = this.state
-    console.log(_.join(_.map(board, function (row) {
-      return _.join(_.map(row, function (col) {
-        if (col === null) {
-          return 0
-        }
-        return col
-      }), ' ')
-    }), '\n'))
+  // log () {
+  //   const {board} = this.state
+  //   console.log(_.join(_.map(board, function (row) {
+  //     return _.join(_.map(row, function (col) {
+  //       if (col === null) {
+  //         return 0
+  //       }
+  //       return col
+  //     }), ' ')
+  //   }), '\n'))
+  // }
+  reset () {
+    this.setState(initialState())
+  }
+
+  undo () {
+    const {prevBoards, prevCurrent} = this.state
+    const board = _.last(prevBoards)
+    this.setState({
+      board,
+      current: prevCurrent,
+      prevBoards: _.dropRight(prevBoards),
+      prevCurrent: prevCurrent === X ? O : X,
+      won: null,
+    })
   }
 
   warn () {
@@ -81,17 +115,20 @@ class Board extends React.Component {
   }
 
   play (x, y) {
-    const {board, current} = this.state
-    const prev = _.concat(this.state.prev, board)
+    // const {board, current} = this.state
+    // const prev = _.concat(this.state.prev, board)
+    const {board, current, prevBoards} = this.state
     if (board[x][y]) {
       return false
     }
-
+    const prevCurrent = current
+    prevBoards.push(_.cloneDeep(board))
     board[x][y] = current
     this.setState({
       board,
       current: current === X ? O : X,
-      prev,
+      prevBoards,
+      prevCurrent,
     })
     return true
   }
@@ -103,7 +140,8 @@ class Board extends React.Component {
       return
     }
     this.process(x, y)
-    this.log()
+    // this.log()
+    log(this.state.board)
   }
 
   render () {
@@ -135,8 +173,13 @@ class Board extends React.Component {
           {current === O && <h2>PLAYERS MOVE: O</h2>}
           {won === X && <h1>X won</h1>}
           {won === O && <h1>O won</h1>}
-          <small>Your goal in Five-in-a-row is to get five X's in a
-           row while preventing your opponent from getting five O's in a row.</small>
+          <div onClick={this.reset}>
+            Reset
+          </div>
+          {_.size(this.state.prevBoards) > 0 && <div onClick={this.undo}>
+            Undo
+          </div>}
+
         </div>
       </div>
     )
