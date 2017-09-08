@@ -172,18 +172,28 @@ class Board extends React.Component {
           </div>
         </div>
         <div className='info-container'>
-          {current === X && <h2>PLAYERS MOVE: X</h2>}
-          {current === O && <h2>PLAYERS MOVE: O</h2>}
-          {won === X && <h1>X won</h1>}
-          {won === O && <h1>O won</h1>}
-          <small>Your goal in Five-in-a-row is to get five X's in a
-           row while preventing your opponent from getting five O's in a row.</small>
+          <div className='controls'>
+            {current === X && <p className='label'>PLAYER TURN: X</p>}
+            {current === O && <p className='label'>PLAYER TURN: O</p>}
+            {won === X && <h1>X won</h1>}
+            {won === O && <h1>O won</h1>}
+            <button onClick={this.reset} className='btn btn--info'>
+              Restart Game
+            </button>
+            {_.size(this.state.prevBoards) === 0 &&
+            <button onClick={this.undo} className='btn btn--danger' disabled>
+              Undo Last Move
+            </button>}
+            {_.size(this.state.prevBoards) > 0 &&
+            <button onClick={this.undo} className='btn btn--danger'>
+              Undo Last Move
+            </button>}
+            {this.state.won &&
+              <button onClick={this.replay} className='btn btn--success'>
+              Replay
+            </button>}
+          </div>
         </div>
-        <button onClick={this.reset}>
-          Reset
-        </button>
-        {_.size(this.state.prevBoards) > 0 && <button onClick={this.undo}>Undo</button>}
-        {this.state.won && <button onClick={this.replay}>Replay</button>}
       </div>
     )
   }
