@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 function repeatsTimes (arr, val, times) {
   let r = 0
   for (let i = 0; i < arr.length; ++i) {

@@ -4,19 +4,6 @@ import _ from 'lodash'
 import Square, {X, O} from './Square'
 import {repeatsTimes} from './util'
 
-const SIZE = 20
-const WIN = 5
-
-function initialState () {
-  return {
-    board: _.times(SIZE, () => _.times(SIZE, _.constant(null))),
-    current: X,
-    prevBoards: [],
-    prevCurrent: O,
-    won: null,
-  }
-}
-
 function log (board) {
   console.log(_.join(_.map(board, function (row) {
     return _.join(_.map(row, function (col) {
@@ -28,34 +15,38 @@ function log (board) {
   }), '\n'))
 }
 
-
 class Board extends React.Component {
-  constructor () {
-    super()
-    // const board = _.times(SIZE, () => _.times(SIZE, _.constant(null)))
+  constructor (props) {
+    super(props)
+    this.state = this.initialState()
 
-    this.state = initialState()
     this.click = this.click.bind(this)
+    this.initialState = this.initialState.bind(this)
+    this.process = this.process.bind(this)
+    this.replay = this.replay.bind(this)
     this.reset = this.reset.bind(this)
     this.undo = this.undo.bind(this)
-    this.process = this.process.bind(this)
     this.win = this.win.bind(this)
     this.won = this.won.bind(this)
   }
 
-  // log () {
-  //   const {board} = this.state
-  //   console.log(_.join(_.map(board, function (row) {
-  //     return _.join(_.map(row, function (col) {
-  //       if (col === null) {
-  //         return 0
-  //       }
-  //       return col
-  //     }), ' ')
-  //   }), '\n'))
-  // }
+  componentWillReceiveProps () {
+    this.reset()
+  }
+
+  initialState () {
+    const {size} = this.props
+    return {
+      board: _.times(size, () => _.times(size, _.constant(null))),
+      current: X,
+      prevBoards: [],
+      prevCurrent: O,
+      won: null,
+    }
+  }
+
   reset () {
-    this.setState(initialState())
+    this.setState(this.initialState())
   }
 
   undo () {
@@ -70,8 +61,21 @@ class Board extends React.Component {
     })
   }
 
+  replay () {
+    const {board, prevBoards, current, prevCurrent, won} = this.state
+    let i = 0
+    const interval = setInterval(advance.bind(this), 500)
+    function advance () {
+      this.setState({
+        board: prevBoards[++i] || board,
+      })
+      if (i === _.size(prevBoards)) {
+        clearInterval(interval)
+      }
+    }
+  }
+
   warn () {
-    // when clicking existing
     alert('STOP THAT')
   }
 
@@ -97,30 +101,30 @@ class Board extends React.Component {
 
   won (mark, x, y) {
     const {board} = this.state
-    const range = _.range(-WIN + 1, WIN)
+    const {win} = this.props
+    const range = _.range(-win + 1, win)
     return _.some([
       repeatsTimes(_.map(range, function (i) {
         return _.get(board, [x, y - i])
-      }), mark, WIN), // N-S
+      }), mark, win), // N-S
       repeatsTimes(_.map(range, function (i) {
         return _.get(board, [x + i, y - i])
-      }), mark, WIN), // NE-SW
+      }), mark, win), // NE-SW
       repeatsTimes(_.map(range, function (i) {
         return _.get(board, [x + i, y])
-      }), mark, WIN), // E-W
+      }), mark, win), // E-W
       repeatsTimes(_.map(range, function (i) {
         return _.get(board, [x + i, y + i])
-      }), mark, WIN), // SE-NW
+      }), mark, win), // SE-NW
     ])
   }
 
   play (x, y) {
-    // const {board, current} = this.state
-    // const prev = _.concat(this.state.prev, board)
     const {board, current, prevBoards} = this.state
     if (board[x][y]) {
       return false
     }
+
     const prevCurrent = current
     prevBoards.push(_.cloneDeep(board))
     board[x][y] = current
@@ -140,23 +144,22 @@ class Board extends React.Component {
       return
     }
     this.process(x, y)
-    // this.log()
     log(this.state.board)
   }
 
   render () {
     const click = this.click
-    const {board, won} = this.state
-    const current = this.state.current
+    const {board, won, current} = this.state
+    const {size} = this.props
     return (
       <div>
         <div className='board-container'>
           <div className={'board ' + this.state.current}>
-            {_.map(_.range(0, SIZE), function (y) {
+            {_.map(_.range(0, size), function (y) {
               return (
                 <div className='board__row'>
-                  {_.map(_.range(0, SIZE), function (x) {
-                    return <Square mark={board[x][y]} click={function () {
+                  {_.map(_.range(0, size), function (x) {
+                    return <Square mark={_.get(board, [x, y])} click={function () {
                       if (won) {
                         return
                       }
@@ -173,14 +176,14 @@ class Board extends React.Component {
           {current === O && <h2>PLAYERS MOVE: O</h2>}
           {won === X && <h1>X won</h1>}
           {won === O && <h1>O won</h1>}
-          <div onClick={this.reset}>
-            Reset
-          </div>
-          {_.size(this.state.prevBoards) > 0 && <div onClick={this.undo}>
-            Undo
-          </div>}
-
+          <small>Your goal in Five-in-a-row is to get five X's in a
+           row while preventing your opponent from getting five O's in a row.</small>
         </div>
+        <button onClick={this.reset}>
+          Reset
+        </button>
+        {_.size(this.state.prevBoards) > 0 && <button onClick={this.undo}>Undo</button>}
+        {this.state.won && <button onClick={this.replay}>Replay</button>}
       </div>
     )
   }
