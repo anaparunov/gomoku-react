@@ -27,3 +27,68 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@charset "UTF-8";
+
+@font-face {
+  font-family: "gomoku";
+  src:url("/font/gomoku.eot");
+  src:url("/font/gomoku.eot?#iefix") format("embedded-opentype"),
+    url("/font/gomoku.woff") format("woff"),
+    url("/font/gomoku.ttf") format("truetype"),
+    url("/font/gomoku.svg#gomoku") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "gomoku" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "gomoku" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-logout:before {
+  content: "\61";
+}
+.icon-size:before {
+  content: "\64";
+}
+.icon-play:before {
+  content: "\65";
+}
+.icon-trophy:before {
+  content: "\66";
+}
+.icon-chart-bar:before {
+  content: "\67";
+}
+.icon-undo:before {
+  content: "\63";
+}
+.icon-redo:before {
+  content: "\62";
+}
+.icon-refresh:before {
+  content: "\68";
+}

@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor () {
     super()
     this.state = {
-      size: 20,
+      size: 5,
       win: 5,
     }
     this.handleSizeChange = this.handleSizeChange.bind(this)
@@ -29,6 +29,7 @@ class App extends React.Component {
   render () {
     return (
       <div className='App'>
+        <div className='app-bg'></div>
         <div className='wrapper'>
           <div className='site-content'>
             <div className='site-header'>

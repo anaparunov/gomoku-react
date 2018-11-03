@@ -7,6 +7,11 @@ import registerServiceWorker from './registerServiceWorker'
 ReactDOM.render(<App />, document.getElementById('root'))
 registerServiceWorker()
 
-// undo funkcionalnost
-// odabrat velicinu ploce
-// igranje protiv kompjutera
+// dva igrača
+// (dodajte mogućnost nekakvog odabira nicka, eventualno ga zabilježite ga
+// kao dugotrajni cookie ili napravite punu autentikaciju pomoću nekog plugina).
+// Onda možete lako dodati i statistike/rang liste za igrače na serverskoj strani
+// opcije prije početka igre, odigravanje, prikaz statistike
+// Play on the same computer i Invite Your friend.
+// lobby - stolovi, igrac moze odabrat stol.
+// prekinit igru nakon odredenog timeouta
