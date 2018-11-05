@@ -153,47 +153,109 @@ class Board extends React.Component {
     const {size} = this.props
     return (
       <div>
-        <div className='board-container'>
-          <div className={'board ' + this.state.current}>
-            {_.map(_.range(0, size), function (y) {
-              return (
-                <div className='board__row'>
-                  {_.map(_.range(0, size), function (x) {
-                    return <Square mark={_.get(board, [x, y])} click={function () {
-                      if (won) {
-                        return
-                      }
-                      click(x, y)
-                    }} />
-                  })}
+        <div className='board-header row'>
+          <div className='col-xs-12'>
+            <div className='row center-xs around-xs'>
+              <div className='col-xs-5'>
+                <div className='text-right'>
+                  <div className='row end-xs'>
+                    <div className='col-xs-6'>
+                      <div>
+                        PLAYER NICKNAME X
+                        {won === X && <h1>X won</h1>}
+                      </div>
+
+                    </div>
+                    <div className='col-xs-2'>
+                      <div className='player-wins'>
+                        2
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              )
-            })}
+              </div>
+              <div className='col-xs-1'>
+                <strong>
+                  :
+                </strong>
+              </div>
+              <div className='col-xs-5'>
+                <div className='text-left'>
+                  <div className='row start-xs'>
+                    <div className='col-xs-2'>
+                      <div className='player-wins'>
+                        0
+                      </div>
+                    </div>
+                    <div className='col-xs-6'>
+                      <div>
+                        PLAYER NICKNAME O
+                        {won === O && <h1>O won</h1>}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              {/* <button onClick={this.reset} className='btn btn--info'> */}
+              {/*   Restart Game */}
+              {/* </button> */}
+
           </div>
         </div>
-        <div className='info-container'>
-          <div className='controls'>
-            {current === X && <p className='label'>PLAYER TURN: X</p>}
-            {current === O && <p className='label'>PLAYER TURN: O</p>}
-            {won === X && <h1>X won</h1>}
-            {won === O && <h1>O won</h1>}
-            <button onClick={this.reset} className='btn btn--info'>
-              Restart Game
-            </button>
-            {_.size(this.state.prevBoards) === 0 &&
-            <button onClick={this.undo} className='btn btn--danger' disabled>
-              Undo Last Move
-            </button>}
-            {_.size(this.state.prevBoards) > 0 &&
-            <button onClick={this.undo} className='btn btn--danger'>
-              Undo Last Move
-            </button>}
-            {this.state.won &&
-              <button onClick={this.replay} className='btn btn--success'>
-              Replay
-            </button>}
+        <div className='row'>
+          <div className='col-xs-12 col-sm-6 col-sm-offset-3'>
+            <div className='board-container'>
+              <div className={'board ' + this.state.current}>
+                {_.map(_.range(0, size), function (y) {
+                  return (
+                    <div className='board__row'>
+                      {_.map(_.range(0, size), function (x) {
+                        return <Square mark={_.get(board, [x, y])} click={function () {
+                          if (won) {
+                            return
+                          }
+                          click(x, y)
+                        }} />
+                      })}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </div>
+        <div className='board-footer row center-xs'>
+          <div className='col-xs-12'>
+            <div className='info-container'>
+                <p>
+                  PLAYER TURN:
+                  {current === X && <span>X</span>}
+                  {current === O && <span>O</span>}
+                </p>
+                {_.size(this.state.prevBoards) === 0 &&
+                <button onClick={this.undo} disabled>
+                  <i className='icon-undo'></i>
+                  <span>Undo Move</span>
+                </button>}
+                {_.size(this.state.prevBoards) > 0 &&
+                <button onClick={this.undo}>
+                  <i className='icon-undo'></i>
+                  <span>Undo Move</span>
+                </button>}
+                <button type='button'>
+                  <i className='icon-redo'></i>
+                  <span>Redo Move</span>
+                </button>
+                {this.state.won &&
+                  <button onClick={this.replay}>
+                  Replay
+                </button>}
+            </div>
+          </div>
+        </div>
+
       </div>
     )
   }

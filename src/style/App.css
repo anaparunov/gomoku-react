@@ -1452,6 +1452,12 @@ body {
   background-repeat: no-repeat;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+}
+
 /* TYPOGRAPHY */
 
 h1,
@@ -1461,11 +1467,24 @@ h3 {
   font-weight: bold;
   font-size: 16px;
   text-transform: uppercase;
+  display: inline-block;
 }
 
 .small {
   font-size: 10px;
   font-weight: normal;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
 }
 
 button,
@@ -1483,15 +1502,17 @@ button,
   text-decoration: none;
   background-color: transparent;
   font-family: 'Rubik', system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
   line-height: 1;
   text-align: center;
   position: relative;
   padding: 10px 20px;
+  margin: 0 5px;
   color: #000;
   transition: all 0.1s ease-in-out;
+  display: inline-block;
 }
 
 button:focus, .btn:focus {
@@ -1503,6 +1524,18 @@ button img, .btn img {
     width: 100%;
     height: auto;
     max-width: 20px;
+}
+
+button i, .btn i {
+    font-size: 18px;
+    position: relative;
+    line-height: 1;
+    top: 3px;
+    margin-right: 5px;
+}
+
+button>span + i, .btn>span + i {
+  margin-left: 10px;
 }
 
 .btn---board {
@@ -1537,13 +1570,13 @@ button img, .btn img {
   background-color: white;
 }
 
+button[disabled],
 .btn[disabled] {
   color: fff;
-  background-color: #ddd;
   opacity: 0.7;
 }
 
-.btn[disabled]:hover {
+button[disabled]:hover, .btn[disabled]:hover {
   cursor: not-allowed;
 }
 
@@ -1567,7 +1600,45 @@ input[type='number']:focus {
   outline: none;
 }
 
+.stats {
+  text-align: center;
+}
+
+.table {
+  display: table;
+  max-width: 300px;
+  margin: 40px auto;
+  font-size: 20px;
+}
+
+.table-head {
+  display: table-header-group;
+}
+
+.table-foot {
+  display: table-footer-group;
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-col {
+  width: 200px;
+  display: table-cell;
+}
+
 /* GENERAL */
+
+.site-title a {
+    white-space: nowrap;
+}
+
+.site-title i {
+    margin: 0 20px;
+    position: relative;
+    top: 2px;
+}
 
 .site-content:after {
   content: '';
@@ -1579,41 +1650,22 @@ input[type='number']:focus {
   padding-top: 20px;
 }
 
-.board-container,
-.info-container {
-  float: left;
-}
-
 .board-container {
   width: 100%;
-}
-
-@media (min-width: 768px) {
-
-  .board-container {
-    width: 70%;
-  }
-}
-
-@media (min-width: 960px) {
-
-  .board-container {
-    width: 50%;
-  }
+  margin: 20px 0;
 }
 
 .info-container {
-  padding-top: 20px;
+  padding: 20px 0;
   width: 100%;
 }
 
-@media (min-width: 768px) {
+.board-header {
+  padding: 40px 0 0 0;
+}
 
-  .info-container {
-    width: 30%;
-    padding-top: 0;
-    padding-left: 20px;
-  }
+.board-footer {
+  padding-bottom: 20px;
 }
 
 .board__row {
@@ -1684,6 +1736,11 @@ input[type='number']:focus {
   margin: 0 10px 0 0;
 }
 
+.controls {
+  text-align: right;
+  white-space: nowrap;
+}
+
 .controls .label {
     margin-bottom: 40px;
     font-weight: bold;
@@ -1693,8 +1750,63 @@ input[type='number']:focus {
     margin: 0 0 10px;
 }
 
-.site-header .controls .label {
-      font-weight: normal;
+.player-wins {
+  text-align: center;
+  font-weight: bold;
+}
+
+.action-box {
+  text-align: center;
+  background-color: #fff;
+  position: relative;
+  padding: 40px 40px 100px 40px;
+  max-width: 590px;
+  margin: 30px auto 100px auto;
+}
+
+.action-box__footer {
+    background-color: #7EEFCC;
+    color: #000;
+    position: absolute;
+    z-index: 2;
+    right: -40px;
+    bottom: -20px;
+    top: auto;
+    top: initial;
+    width: auto;
+}
+
+.action-box__footer .btn {
+      font-size: 18px;
+      padding: 40px 60px;
+}
+
+.settings-item {
+  display: -webkit-box;
+  display: flex;
+  align-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+
+.settings-item i {
+    width: 30px;
+    font-size: 20px;
+    top: 4px;
+    position: relative;
+    margin-right: 10px;
+}
+
+.settings-item i.icon-trophy {
+  font-size: 24px;
+}
+
+.settings-item span {
+    min-width: 140px;
 }
 
 

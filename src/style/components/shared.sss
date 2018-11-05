@@ -1,33 +1,31 @@
 /* GENERAL */
+.site-title
+  a
+    white-space: nowrap
+  i
+    margin: 0 20px
+    position: relative
+    top: 2px
 
 .site-content
   clear: fix
   padding-top: 20px
 
-.board-container,
-.info-container
-  float: left
-
 .board-container
   width: 100%
-
-  @media (--tablet)
-    width: 70%
-
-  @media (--desktop)
-    width: 50%
+  margin: 20px 0
 
 .info-container
-  padding-top: 20px
+  padding: 20px 0
   width: 100%
 
-  @media (--tablet)
-    width: 30%
-    padding-top: 0
-    padding-left: 20px
+.board-header
+  padding: 40px 0 0 0
+
+.board-footer
+  padding-bottom: 20px
 
 .board
-
   &__row
     display: flex
 
@@ -83,6 +81,8 @@
 
 
 .controls
+  text-align: right
+  white-space: nowrap
   .label
     margin-bottom: 40px
     font-weight: bold
@@ -90,8 +90,46 @@
   .btn
     margin: 0 0 10px
 
-.site-header
-  .controls
-    .label
-      font-weight: normal
+.player-wins
+  text-align: center
+  font-weight: bold
 
+.action-box
+  text-align: center
+  background-color: #fff
+  position: relative
+  padding: 40px 40px 100px 40px
+  max-width: 590px
+  margin: 30px auto 100px auto
+
+  &__footer
+    background-color: var(--color-1)
+    color: #000
+    position: absolute
+    z-index: 2
+    right: -40px
+    bottom: -20px
+    top: initial
+    width: auto
+
+    .btn
+      font-size: 18px
+      padding: 40px 60px
+
+.settings-item
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  padding-bottom: 20px
+  font-size: 20px
+  i
+    width: 30px
+    font-size: 20px
+    top: 4px
+    position: relative
+    margin-right: 10px
+    &.icon-trophy
+      font-size: 24px
+  span
+    min-width: 140px
