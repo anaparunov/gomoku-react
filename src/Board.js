@@ -153,56 +153,21 @@ class Board extends React.Component {
     const {size} = this.props
     return (
       <div>
-        <div className='board-header row'>
-          <div className='col-xs-12'>
-            <div className='row center-xs around-xs'>
-              <div className='col-xs-5'>
-                <div className='text-right'>
-                  <div className='row end-xs'>
-                    <div className='col-xs-6'>
-                      <div>
-                        PLAYER NICKNAME X
-                        {won === X && <h1>X won</h1>}
-                      </div>
-
-                    </div>
-                    <div className='col-xs-2'>
-                      <div className='player-wins'>
-                        2
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className='col-xs-1'>
-                <strong>
-                  :
-                </strong>
-              </div>
-              <div className='col-xs-5'>
-                <div className='text-left'>
-                  <div className='row start-xs'>
-                    <div className='col-xs-2'>
-                      <div className='player-wins'>
-                        0
-                      </div>
-                    </div>
-                    <div className='col-xs-6'>
-                      <div>
-                        PLAYER NICKNAME O
-                        {won === O && <h1>O won</h1>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-              {/* <button onClick={this.reset} className='btn btn--info'> */}
-              {/*   Restart Game */}
-              {/* </button> */}
-
-          </div>
+        <div className='board-header'>
+          <span className='player'>
+            NICKNAME X
+            {won === X && <h1>X won</h1>}
+            <span className='player__wins'>0</span>
+          </span>
+          <span>:</span>
+          <span className='player'>
+            <span className='player__wins'>0</span>
+            NICKNAME O
+            {won === O && <h1>O won</h1>}
+          </span>
+          {/* <button onClick={this.reset} className='btn btn--info'> */}
+          {/*   Restart Game */}
+          {/* </button> */}
         </div>
         <div className='row'>
           <div className='col-xs-12 col-sm-6 col-sm-offset-3'>

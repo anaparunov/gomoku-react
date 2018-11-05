@@ -1586,13 +1586,16 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 input[type='number'] {
+  display: inline-block;
   border: 0;
   color: #000;
   font-size: 18px;
   padding: 10px 20px;
   text-align: center;
-  margin: 0 10px;
-  background-color: transparent;
+  margin: 2px 10px 1px 10px;
+  height: 50px;
+  width: 80px;
+  background-color: rgba(0, 0, 0, .1);
   font-weight: bold;
 }
 
@@ -1609,6 +1612,7 @@ input[type='number']:focus {
   max-width: 300px;
   margin: 40px auto;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .table-head {
@@ -1626,6 +1630,8 @@ input[type='number']:focus {
 .table-col {
   width: 200px;
   display: table-cell;
+  border-bottom: 2px solid #000;
+  padding: 10px 0;
 }
 
 /* GENERAL */
@@ -1662,6 +1668,29 @@ input[type='number']:focus {
 
 .board-header {
   padding: 40px 0 0 0;
+  text-align: center;
+}
+
+.board-header .player {
+    width: 150px;
+    vertical-align: top;
+}
+
+.board-header .player:first-child {
+  text-align: right;
+}
+
+.board-header .player:last-child {
+  text-align: left;
+}
+
+.board-header .player__wins {
+      font-weight: bold;
+}
+
+.board-header span {
+    display: inline-block;
+    margin: 0 10px;
 }
 
 .board-footer {
@@ -1761,6 +1790,8 @@ input[type='number']:focus {
   position: relative;
   padding: 40px 40px 100px 40px;
   max-width: 590px;
+  width: 80%;
+  min-height: 300px;
   margin: 30px auto 100px auto;
 }
 
@@ -1777,8 +1808,13 @@ input[type='number']:focus {
 }
 
 .action-box__footer .btn {
+      margin: 0;
       font-size: 18px;
       padding: 40px 60px;
+}
+
+.action-box__footer .btn:hover {
+  background-color: #FFEC57;
 }
 
 .settings-item {

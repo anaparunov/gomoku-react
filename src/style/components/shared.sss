@@ -21,6 +21,21 @@
 
 .board-header
   padding: 40px 0 0 0
+  text-align: center
+
+  .player
+    width: 150px
+    vertical-align: top
+    &:first-child
+      text-align: right
+    &:last-child
+      text-align: left
+
+    &__wins
+      font-weight: bold
+  span
+    display: inline-block
+    margin: 0 10px
 
 .board-footer
   padding-bottom: 20px
@@ -100,6 +115,8 @@
   position: relative
   padding: 40px 40px 100px 40px
   max-width: 590px
+  width: 80%
+  min-height: 300px
   margin: 30px auto 100px auto
 
   &__footer
@@ -113,8 +130,11 @@
     width: auto
 
     .btn
+      margin: 0
       font-size: 18px
       padding: 40px 60px
+      &:hover
+        background-color: var(--color-3)
 
 .settings-item
   display: flex
