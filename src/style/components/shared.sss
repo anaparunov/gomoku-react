@@ -95,15 +95,28 @@
   margin: 0 10px 0 0
 
 
-.controls
+.toolbar-right
   text-align: right
   white-space: nowrap
+  display: flex
+  align-items: middle
+  align-content: flex-end
   .label
     margin-bottom: 40px
     font-weight: bold
 
   .btn
     margin: 0 0 10px
+
+.game-settings
+  position: relative
+  &__dropdown
+    padding: 20px
+    position: absolute
+    top: 100%
+    right: 0
+    background-color: var(--color-3)
+
 
 .player-wins
   text-align: center

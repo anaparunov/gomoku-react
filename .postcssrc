@@ -7,7 +7,7 @@
         ".css"
       ]
     },
-    "postcss-cssnext": {
+    "postcss-preset-env": {
       "browsers": [
         ">1%",
         "firefox esr",

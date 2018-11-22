@@ -205,14 +205,10 @@ class Board extends React.Component {
                   <span>Undo Move</span>
                 </button>}
                 {_.size(this.state.prevBoards) > 0 &&
-                <button onClick={this.undo}>
+                <button type='button' onClick={this.undo}>
                   <i className='icon-undo'></i>
                   <span>Undo Move</span>
                 </button>}
-                <button type='button'>
-                  <i className='icon-redo'></i>
-                  <span>Redo Move</span>
-                </button>
                 {this.state.won &&
                   <button onClick={this.replay}>
                   Replay
