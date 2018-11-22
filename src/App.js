@@ -1,12 +1,17 @@
 import React from 'react'
 import _ from 'lodash'
 
+
 import Board from './Board'
+import GameOptions from './GameOptions'
 
 class App extends React.Component {
   constructor () {
     super()
-
+    this.state = {
+      size: 5,
+      win: 5,
+    }
   }
 
   render () {
@@ -30,25 +35,11 @@ class App extends React.Component {
                     <i className='icon-refresh'></i>
                     <span>New game</span>
                   </button>
-                  {/* <div className='game-settings'> */}
-                  {/*   <button type='button' className='game-settings'> */}
-                  {/*     Game settings <span>&#8595;</span> */}
-                  {/*   </button> */}
-                  {/*   <div className='game-settings__dropdown'> */}
-                  {/*     <span className='label'> */}
-                  {/*       <i className='icon-size'></i> */}
-                  {/*       <input type='number' min={this.state.win} max='30' value={this.state.size} onChange={this.handleSizeChange} /> */}
-                  {/*     </span> */}
-                  {/*     <span className='label'> */}
-                  {/*       <i className='icon-trophy'></i> */}
-                  {/*       <input type='number' min='3' max={this.state.size} value={this.state.win} onChange={this.handleWinChange} /> */}
-                  {/*     </span> */}
-                  {/*   </div> */}
-                  {/* </div> */}
                 </div>
               </div>
             </div>
             <Board size={this.state.size} win={this.state.win} />
+            {/* <Route path="/welcome" component={GameWelcome} /> */}
           </div>
         </div>
       </div>
