@@ -19,7 +19,6 @@ class Board extends React.Component {
   constructor (props) {
     super(props)
     this.state = this.initialState()
-
     this.click = this.click.bind(this)
     this.initialState = this.initialState.bind(this)
     this.process = this.process.bind(this)
@@ -165,9 +164,9 @@ class Board extends React.Component {
             NICKNAME O
             {won === O && <h1>O won</h1>}
           </span>
-          {/* <button onClick={this.reset} className='btn btn--info'> */}
-          {/*   Restart Game */}
-          {/* </button> */}
+          <button onClick={this.reset} className='btn btn--info'>
+            Restart Game
+          </button>
         </div>
         <div className='row'>
           <div className='col-xs-12 col-sm-6 col-sm-offset-3'>
@@ -194,25 +193,25 @@ class Board extends React.Component {
         <div className='board-footer row center-xs'>
           <div className='col-xs-12'>
             <div className='info-container'>
-                <p>
-                  PLAYER TURN:
-                  {current === X && <span>X</span>}
-                  {current === O && <span>O</span>}
-                </p>
-                {_.size(this.state.prevBoards) === 0 &&
-                <button onClick={this.undo} disabled>
-                  <i className='icon-undo'></i>
-                  <span>Undo Move</span>
-                </button>}
-                {_.size(this.state.prevBoards) > 0 &&
-                <button type='button' onClick={this.undo}>
-                  <i className='icon-undo'></i>
-                  <span>Undo Move</span>
-                </button>}
-                {this.state.won &&
-                  <button onClick={this.replay}>
-                  Replay
-                </button>}
+              <p>
+                PLAYER TURN:
+                {current === X && <span>X</span>}
+                {current === O && <span>O</span>}
+              </p>
+              {_.size(this.state.prevBoards) === 0 &&
+              <button onClick={this.undo} disabled>
+                <i className='icon-undo'></i>
+                <span>Undo Move</span>
+              </button>}
+              {_.size(this.state.prevBoards) > 0 &&
+              <button type='button' onClick={this.undo}>
+                <i className='icon-undo'></i>
+                <span>Undo Move</span>
+              </button>}
+              {this.state.won &&
+                <button onClick={this.replay}>
+                Replay
+              </button>}
             </div>
           </div>
         </div>

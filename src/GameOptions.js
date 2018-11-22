@@ -1,6 +1,28 @@
 import React from 'react'
+import _ from 'lodash'
 
 class GameOptions extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      size: 5,
+      win: 5,
+    }
+    this.handleSizeChange = this.handleSizeChange.bind(this)
+    this.handleWinChange = this.handleWinChange.bind(this)
+  }
+
+  handleSizeChange (e) {
+    this.setState({
+      size: _.toInteger(e.target.value),
+    })
+  }
+
+  handleWinChange (e) {
+    this.setState({
+      win: _.toInteger(e.target.value),
+    })
+  }
   render () {
     return (
       <div>
